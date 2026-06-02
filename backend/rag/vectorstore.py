@@ -7,8 +7,8 @@ from pathlib import Path
 CHROMA_PATH = Path("chroma_db")
 EMBED_MODEL = "all-MiniLM-L6-v2"
 
-_client: chromadb.Client | None = None
-_embedder: SentenceTransformer | None = None
+_client = None  # chromadb.PersistentClient
+_embedder = None  # SentenceTransformer
 
 
 def _get_client() -> chromadb.Client:
