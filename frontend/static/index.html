@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAGCore — Multi-domain Document Intelligence</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.6; }
+    a { color: #7c9ef5; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header { padding: 4rem 2rem 2rem; text-align: center; border-bottom: 1px solid #1e2130; }
+    header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1px; }
+    header h1 span { color: #7c9ef5; }
+    header p { margin-top: .8rem; font-size: 1.1rem; color: #8a8fa8; max-width: 600px; margin-inline: auto; }
+
+    .badges { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+    .badge { background: #1e2130; border: 1px solid #2e3250; padding: .3rem .8rem; border-radius: 999px; font-size: .8rem; color: #aab; }
+
+    .cta { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: .7rem 1.6rem; border-radius: 8px; font-size: .95rem; font-weight: 600; cursor: pointer; border: none; }
+    .btn-primary { background: #7c9ef5; color: #0f1117; }
+    .btn-secondary { background: transparent; border: 1px solid #3a3f55; color: #e0e0e0; }
+
+    section { max-width: 1000px; margin: 4rem auto; padding: 0 2rem; }
+    h2 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .card { background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 12px; padding: 1.5rem; }
+    .card .icon { font-size: 1.8rem; margin-bottom: .6rem; }
+    .card h3 { font-size: 1rem; margin-bottom: .4rem; }
+    .card p { font-size: .88rem; color: #8a8fa8; }
+
+    .stack { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .stack-item { background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 8px; padding: .4rem .9rem; font-size: .85rem; }
+    .stack-item strong { color: #7c9ef5; }
+
+    .arch { background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 12px; padding: 1.5rem; font-family: monospace; font-size: .85rem; color: #aab; white-space: pre; overflow-x: auto; }
+
+    footer { text-align: center; padding: 3rem 1rem; border-top: 1px solid #1e2130; color: #555; font-size: .85rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RAG<span>Core</span></h1>
+  <p>Multi-domain document intelligence powered by Claude AI. Upload documents, ask questions, run agentic data analysis.</p>
+  <div class="badges">
+    <span class="badge">Claude API</span>
+    <span class="badge">RAG Pipeline</span>
+    <span class="badge">Vector DB (Chroma)</span>
+    <span class="badge">FastAPI</span>
+    <span class="badge">Streamlit</span>
+    <span class="badge">Docker</span>
+    <span class="badge">Azure Ready</span>
+  </div>
+  <div class="cta">
+    <a href="/docs"><button class="btn btn-primary">API Docs →</button></a>
+    <a href="https://github.com/ZahraParvin/ragcore" target="_blank"><button class="btn btn-secondary">GitHub</button></a>
+  </div>
+</header>
+
+<section>
+  <h2>Features</h2>
+  <div class="features">
+    <div class="card">
+      <div class="icon">📄</div>
+      <h3>Multi-format ingestion</h3>
+      <p>Upload PDFs, CSVs, or plain text. Automatic chunking and embedding into a persistent vector store.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Conversational Q&A</h3>
+      <p>Multi-turn chat over your documents with source citations. Claude retrieves relevant chunks before generating answers.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔬</div>
+      <h3>Agentic data analysis</h3>
+      <p>Claude uses function calling to run statistical analysis, detect anomalies, and filter datasets — not just summarise them.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🗂️</div>
+      <h3>Domain presets</h3>
+      <p>Separate collections for industrial sensor data, financial reports, and general documents. Switch context instantly.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Architecture</h2>
+  <div class="arch">
+User → Streamlit UI → FastAPI backend
+                          │
+              ┌───────────┴────────────┐
+              │                        │
+        RAG Pipeline             Agent Pipeline
+              │                        │
+    Chroma vector DB           Claude tool use
+    (sentence-transformers)    (pandas analysis)
+              │                        │
+         Claude API ←──────────────────┘
+              │
+         Response + sources
+  </div>
+</section>
+
+<section>
+  <h2>Tech Stack</h2>
+  <div class="stack">
+    <div class="stack-item"><strong>LLM</strong> Claude API (Anthropic)</div>
+    <div class="stack-item"><strong>Embeddings</strong> sentence-transformers</div>
+    <div class="stack-item"><strong>Vector DB</strong> ChromaDB</div>
+    <div class="stack-item"><strong>Backend</strong> FastAPI + Uvicorn</div>
+    <div class="stack-item"><strong>Frontend</strong> Streamlit</div>
+    <div class="stack-item"><strong>Data</strong> pandas + pdfplumber</div>
+    <div class="stack-item"><strong>Deploy</strong> Docker · Azure Container Apps · Railway</div>
+  </div>
+</section>
+
+<section>
+  <h2>Quick Start</h2>
+  <div class="arch">git clone https://github.com/ZahraParvin/ragcore
+cd ragcore
+cp .env.example .env        # add your ANTHROPIC_API_KEY
+docker compose up           # starts API on :8000, Streamlit on :8501</div>
+</section>
+
+<footer>
+  Built by <a href="https://linkedin.com/in/zahraparvin">Zahra Parvin</a> · RAGCore is an open-source portfolio project
+</footer>
+
+</body>
+</html>
